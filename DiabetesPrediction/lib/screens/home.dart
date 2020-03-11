@@ -20,36 +20,9 @@ class _HomePageState extends State<HomePage>
     return Scaffold
     (
       backgroundColor: white,
-      body: Container
+      body: Center
       (
-        margin: EdgeInsets.only(top: screenWidth* 0.5),
-        child: Center
-        (
-          child: Column
-          (
-            children: <Widget>
-            [
-              Container
-              (
-                margin: EdgeInsets.only(right: screenWidth* 0.15, left: screenWidth* 0.15),
-                child: Image.asset('assets/images/diabetesPrediction.png'),
-              ),
-              Container
-              (
-                margin: EdgeInsets.only(right: screenWidth* 0.1, left: screenWidth* 0.1),
-                child: Text
-                (
-                  'Diabetes Prediction',
-                  style: TextStyle
-                  (
-                    color: Colors.black,
-                    fontSize: 30.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        child: Text("Home screen"),
       ),
     );
   }
