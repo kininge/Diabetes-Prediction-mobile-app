@@ -4,11 +4,36 @@ import 'package:flutter/rendering.dart';
 class SplashScreen extends StatefulWidget
 {
   @override 
-  SplashScreenState createState()=> SplashScreenState();
+  _SplashScreenState createState()=> _SplashScreenState();
 }
 
-class SplashScreenState extends State<SplashScreen>
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin
 {
+  Animation<double> fadeAnimation;
+  AnimationController fadeController;
+
+  initState()
+  {
+    super.initState();
+
+    fadeController= AnimationController
+    (
+      duration: Duration(seconds: 5),
+      vsync: this,
+    );
+
+    fadeAnimation= Tween(begin: 0.0, end: 1.0)
+    .animate
+    (
+      CurvedAnimation
+      (
+        parent: fadeController, 
+        curve: Curves.easeIn,
+      ),
+    );
+
+    fadeController.forward();
+  }
 
   @override 
   Widget build(BuildContext context)
@@ -38,26 +63,30 @@ class SplashScreenState extends State<SplashScreen>
 
   Widget logo(double screenWidth)
   {
-    return AnimatedOpacity
+    return AnimatedBuilder
     (
-      opacity: 1.0,
-      curve: Curves.easeIn,
-      duration: Duration(seconds: 1),
+      animation: fadeAnimation,
       child: Container
       (
         margin: EdgeInsets.only(right: screenWidth* 0.2, left: screenWidth* 0.2),
         child: Image.asset('assets/images/diabetesPrediction.png'),
       ),
+      builder: (BuildContext context, Widget child) 
+      {
+        return FadeTransition
+        (
+          opacity: fadeAnimation,
+          child: child
+        );
+      },
     );
   }
 
   Widget title(double screenWidth)
   {
-    return AnimatedOpacity
+    return AnimatedBuilder
     (
-      opacity: 1.0,
-      curve: Curves.easeIn,
-      duration: Duration(seconds: 1),
+      animation: fadeAnimation,
       child: Container
       (
         margin: EdgeInsets.only(right: screenWidth* 0.1, left: screenWidth* 0.1),
@@ -71,6 +100,14 @@ class SplashScreenState extends State<SplashScreen>
           ),
         ),
       ),
+      builder: (BuildContext context, Widget child)
+      {
+        return FadeTransition
+        (
+          opacity: fadeAnimation,
+          child: child,
+        );
+      },
     );
   }
 }
