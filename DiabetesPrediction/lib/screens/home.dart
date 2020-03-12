@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage>
   @override 
   Widget build(BuildContext context)
   {
-    final double screenWidth= MediaQuery.of(context).size.width;
+    //final double screenWidth= MediaQuery.of(context).size.width;
 
     return Scaffold
     (
