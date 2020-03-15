@@ -8,21 +8,15 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  Color iceBurg= Color.fromRGBO(217, 236, 242, 1.0);
-  Color white= Color.fromRGBO(220, 220, 220, 1.0);
-  Color black= Color.fromRGBO(33, 43, 56, 1.0);
-
   @override 
   Widget build(BuildContext context)
   {
-    //final double screenWidth= MediaQuery.of(context).size.width;
-
     return Scaffold
     (
-      backgroundColor: white,
+      backgroundColor: Color.fromRGBO(209, 209, 209, 1.0),
       body: Center
       (
-        child: Text("Home screen"),
+        child: Text('Home screen'),
       ),
     );
   }
