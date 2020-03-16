@@ -1,3 +1,5 @@
+import 'package:DiabetesPrediction/screens/dataCollection.dart';
+import 'package:DiabetesPrediction/screens/logIn.dart';
 import 'package:flutter/material.dart';
 
 class Choice extends StatelessWidget
@@ -13,12 +15,13 @@ class Choice extends StatelessWidget
     (
       child: Scaffold
       (
+        //backgroundColor: Color.fromRGBO(209, 209, 209, 1.0),
         body: Column
         (
           children: <Widget>
           [
             logo(),
-            transitionPage(),
+            transitionPage(context),
           ],
         ),
       ),
@@ -63,36 +66,47 @@ class Choice extends StatelessWidget
     );
   }
 
-  Widget transitionPage()
+  Widget transitionPage(BuildContext context)
   {
-    Widget optionOne= RichText
+    Widget optionOne= Hero
     (
-      text: TextSpan
+      tag: 'toDataCollection', 
+      child: GestureDetector
       (
-        style: null,
-        children: 
-        [
-          TextSpan
+        child: RichText
+        (
+          text: TextSpan
           (
-            text: 'Continue as ',
-            style: TextStyle
-            (
-              fontSize: 22.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-            ) 
+            style: null,
+            children: 
+            [
+              TextSpan
+              (
+                text: 'Continue as ',
+                style: TextStyle
+                (
+                  fontSize: 20.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ) 
+              ),
+              TextSpan
+              (
+                text: 'Guest',
+                style: TextStyle
+                (
+                  fontSize: 20.0,
+                  color: Color.fromRGBO(43, 174, 102, 1.0),
+                  fontWeight: FontWeight.bold,
+                ) 
+              ),
+            ]
           ),
-          TextSpan
-          (
-            text: 'Guest',
-            style: TextStyle
-            (
-              fontSize: 22.0,
-              color: Color.fromRGBO(43, 174, 102, 1.0),
-              fontWeight: FontWeight.bold,
-            ) 
-          ),
-        ]
+        ),
+        onTap: ()
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> DataCollectionPage()));
+        },
       ),
     );
     
@@ -130,34 +144,45 @@ class Choice extends StatelessWidget
       ],
     );
 
-    Widget optionTwo= RichText
+    Widget optionTwo= Hero
     (
-      text: TextSpan
+      tag: 'toLogIn', 
+      child: GestureDetector
       (
-        style: null,
-        children: 
-        [
-          TextSpan
+        child: RichText
+        (
+          text: TextSpan
           (
-            text: 'Want to ',
-            style: TextStyle
-            (
-              fontSize: 22.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-            ) 
+            style: null,
+            children: 
+            [
+              TextSpan
+              (
+                text: 'Want to ',
+                style: TextStyle
+                (
+                  fontSize: 20.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ) 
+              ),
+              TextSpan
+              (
+                text: 'Log In',
+                style: TextStyle
+                (
+                  fontSize: 20.0,
+                  color: Color.fromRGBO(43, 174, 102, 1.0),
+                  fontWeight: FontWeight.bold,
+                ) 
+              ),
+            ]
           ),
-          TextSpan
-          (
-            text: 'Log In',
-            style: TextStyle
-            (
-              fontSize: 22.0,
-              color: Color.fromRGBO(43, 174, 102, 1.0),
-              fontWeight: FontWeight.bold,
-            ) 
-          ),
-        ]
+        ),
+        onTap: ()
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> LogInPage()));
+        },
       ),
     );
 

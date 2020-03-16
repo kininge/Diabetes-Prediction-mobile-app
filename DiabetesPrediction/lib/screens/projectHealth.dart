@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget
+class ProjectHealthPage extends StatefulWidget
 {
   @override 
-  _HomePageState createState()=> _HomePageState();
+  _ProjectHealthState createState()=> _ProjectHealthState();
 }
 
-class _HomePageState extends State<HomePage>
+class _ProjectHealthState extends State<ProjectHealthPage>
 {
   @override 
   Widget build(BuildContext context)
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage>
       backgroundColor: Color.fromRGBO(209, 209, 209, 1.0),
       body: Center
       (
-        child: Text('Home screen'),
+        child: Text('Project Health'),
       ),
     );
   }
