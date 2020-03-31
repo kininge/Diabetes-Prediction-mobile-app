@@ -1,16 +1,7 @@
-import 'package:DiabetesPrediction/screens/dataCollection.dart';
-import 'package:DiabetesPrediction/screens/logIn.dart';
 import 'package:flutter/material.dart';
 
-class Choice extends StatefulWidget
+class Choice extends StatelessWidget
 {
-  @override 
-  _ChoieState createState()=> _ChoieState();
-
-}
-
-class _ChoieState extends State<Choice>
-{ 
   Size screenSize;
 
   @override 
@@ -27,7 +18,7 @@ class _ChoieState extends State<Choice>
           children: <Widget>
           [
             logo(),
-            transitionPage(context),
+            transitionPage(),
           ],
         ),
       ),
@@ -72,47 +63,36 @@ class _ChoieState extends State<Choice>
     );
   }
 
-  Widget transitionPage(BuildContext context)
+  Widget transitionPage()
   {
-    Widget optionOne= Hero
+    Widget optionOne= RichText
     (
-      tag: 'toDataCollection', 
-      child: GestureDetector
+      text: TextSpan
       (
-        child: RichText
-        (
-          text: TextSpan
+        style: null,
+        children: 
+        [
+          TextSpan
           (
-            style: null,
-            children: 
-            [
-              TextSpan
-              (
-                text: 'Continue as ',
-                style: TextStyle
-                (
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ) 
-              ),
-              TextSpan
-              (
-                text: 'Guest',
-                style: TextStyle
-                (
-                  fontSize: 20.0,
-                  color: Color.fromRGBO(43, 174, 102, 1.0),
-                  fontWeight: FontWeight.bold,
-                ) 
-              ),
-            ]
+            text: 'Continue as ',
+            style: TextStyle
+            (
+              fontSize: 22.0,
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+            ) 
           ),
-        ),
-        onTap: ()
-        {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> DataCollectionPage()));
-        },
+          TextSpan
+          (
+            text: 'Guest',
+            style: TextStyle
+            (
+              fontSize: 22.0,
+              color: Color.fromRGBO(43, 174, 102, 1.0),
+              fontWeight: FontWeight.bold,
+            ) 
+          ),
+        ]
       ),
     );
     
@@ -150,45 +130,34 @@ class _ChoieState extends State<Choice>
       ],
     );
 
-    Widget optionTwo= Hero
+    Widget optionTwo= RichText
     (
-      tag: 'toLogIn', 
-      child: GestureDetector
+      text: TextSpan
       (
-        child: RichText
-        (
-          text: TextSpan
+        style: null,
+        children: 
+        [
+          TextSpan
           (
-            style: null,
-            children: 
-            [
-              TextSpan
-              (
-                text: 'Want to ',
-                style: TextStyle
-                (
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ) 
-              ),
-              TextSpan
-              (
-                text: 'Log In',
-                style: TextStyle
-                (
-                  fontSize: 20.0,
-                  color: Color.fromRGBO(43, 174, 102, 1.0),
-                  fontWeight: FontWeight.bold,
-                ) 
-              ),
-            ]
+            text: 'Want to ',
+            style: TextStyle
+            (
+              fontSize: 22.0,
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+            ) 
           ),
-        ),
-        onTap: ()
-        {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> LogInPage()));
-        },
+          TextSpan
+          (
+            text: 'Log In',
+            style: TextStyle
+            (
+              fontSize: 22.0,
+              color: Color.fromRGBO(43, 174, 102, 1.0),
+              fontWeight: FontWeight.bold,
+            ) 
+          ),
+        ]
       ),
     );
 
@@ -208,11 +177,5 @@ class _ChoieState extends State<Choice>
         ),
       ),
     );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }

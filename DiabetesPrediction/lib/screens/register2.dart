@@ -2,28 +2,29 @@ import 'package:DiabetesPrediction/BLOC/bloc.dart';
 import 'package:DiabetesPrediction/screens/register.dart';
 import 'package:flutter/material.dart';
 
-class LogInPage extends StatefulWidget
+class Register2Page extends StatefulWidget
 {
   @override 
-  _LogInPageState createState()=> _LogInPageState();
+  _Register2PageState createState()=> _Register2PageState();
 }
 
-class _LogInPageState extends State<LogInPage>
+class _Register2PageState extends State<Register2Page>
 {
   Size screenSize;
-  BLOC bloc= new BLOC();
   bool passwordHidden= true;
+  bool rePasswordHidden= true;
+  
 
   @override 
   Widget build(BuildContext context)
   {
     screenSize= MediaQuery.of(context).size;
 
-    return  SafeArea
+    return SafeArea
     (
       child: Hero
       (
-        tag: 'toLogIn', 
+        tag: "page2",
         child: Scaffold
         (
           body: SingleChildScrollView
@@ -31,39 +32,33 @@ class _LogInPageState extends State<LogInPage>
             child: Container
             (
               padding: EdgeInsets.only(right: 20.0, left: 20.0),
-              margin: EdgeInsets.only(top: screenSize.height* 0.15),
+              margin: EdgeInsets.only(top: screenSize.height* 0.08),
               child: Column
               (
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
                   title(),
                   SizedBox(height: screenSize.height* 0.08),
+                  subtitle(),
                   emailAddress(),
                   SizedBox(height: 20.0),
                   password(),
                   SizedBox(height: 20.0),
+                  rePassword(),
+                  SizedBox(height: 48.0),
                   Row
                   (
                     children: <Widget>
                     [
+                      backButton(context),
                       registerButton(context),
-                      logInButton(context),
                     ],
                   ),
-                  divider(),
-                  Row
-                  (
-                    children: <Widget>
-                    [
-                      google(context),
-                      SizedBox(width: 20.0),
-                      facebook(context),
-                    ],
-                  ),
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 30.0)
                 ],
               ),
-            )
+            ),
           ),
         ),
       ),
@@ -76,7 +71,7 @@ class _LogInPageState extends State<LogInPage>
     (
       child: Text
       (
-        'Log In',
+        'Register',
         style: TextStyle
         (
           fontWeight: FontWeight.bold,
@@ -87,11 +82,30 @@ class _LogInPageState extends State<LogInPage>
     );
   }
 
+  Widget subtitle()
+  {
+    return Container
+    (
+      alignment: Alignment.topLeft,
+      padding: EdgeInsets.only(left: 15.0, bottom: 25.0),
+      child: Text
+      (
+        'Log in data',
+        style: TextStyle
+        (
+          fontWeight: FontWeight.bold,
+          fontSize: 22.0,
+          color: Colors.black45,
+        ),
+      ),
+    );
+  }
+
   Widget emailAddress()
   {
     return StreamBuilder
     (
-      stream: bloc.email,
+      stream: bloc.registerEmail,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot)
       {
         return Column
@@ -114,7 +128,7 @@ class _LogInPageState extends State<LogInPage>
             ),
             TextField
             ( 
-              onChanged: bloc.emailChanged,
+              onChanged: bloc.registerEmailChanged,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration
               (
@@ -160,7 +174,7 @@ class _LogInPageState extends State<LogInPage>
   {
     return StreamBuilder
     (
-      stream: bloc.password,
+      stream: bloc.registerPassword,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot)
       {
         return Column
@@ -183,7 +197,7 @@ class _LogInPageState extends State<LogInPage>
             ),
             TextField
             (  
-              onChanged: bloc.passwordChanged,
+              onChanged: bloc.registerPasswordChanged,
               obscureText: passwordHidden,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration
@@ -250,7 +264,101 @@ class _LogInPageState extends State<LogInPage>
     );
   }
 
-  Widget registerButton(BuildContext context)
+  Widget rePassword()
+  {
+    return StreamBuilder
+    (
+      stream: bloc.registerRePassword,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot)
+      {
+        return Column
+        (
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>
+          [
+            Container
+            (
+              padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+              child: Text
+              (
+                'Re Password',
+                style: TextStyle
+                (
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            TextField
+            (  
+              onChanged: bloc.registerRePasswordChanged,
+              obscureText: rePasswordHidden,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration
+              (
+                errorText: snapshot.error,
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'password...',
+                prefixIcon: Icon
+                (
+                  Icons.enhanced_encryption,
+                  color: Colors.black,
+                  size: 26.0,
+                ),
+                suffixIcon: GestureDetector
+                (
+                  onTap: ()
+                  {
+                    setState(() 
+                    {
+                      rePasswordHidden= !rePasswordHidden;
+                    });
+                  },
+
+                  child: rePasswordHidden? 
+                  Icon
+                  (
+                    Icons.visibility,
+                    color: Colors.black,
+                    size: 26.0,
+                  ):
+                  Icon
+                  (
+                    Icons.visibility_off,
+                    color: Colors.black,
+                    size: 26.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder
+                (
+                  borderSide: BorderSide(color: Colors.black45, width: 3.0),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                focusedBorder: OutlineInputBorder
+                (
+                  borderSide: BorderSide(color: Colors.black, width: 3.5),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                errorBorder: OutlineInputBorder
+                (
+                  borderSide: BorderSide(color: Colors.red, width: 3.0),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                focusedErrorBorder: OutlineInputBorder
+                (
+                  borderSide: BorderSide(color: Colors.red, width: 3.5),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+    );
+  }
+
+  Widget backButton(BuildContext context)
   {
     return FlatButton
     (
@@ -265,7 +373,7 @@ class _LogInPageState extends State<LogInPage>
       padding: EdgeInsets.only(right: screenSize.width* 0.02, left: 0.02, top: 18.0, bottom: 18.0,),
       child: Text
       (
-        'Register',
+        'Back',
         style: TextStyle
         (
           color: Colors.black45,
@@ -276,11 +384,11 @@ class _LogInPageState extends State<LogInPage>
     );
   }
 
-  Widget logInButton(BuildContext context)
+  Widget registerButton(BuildContext context)
   {
     return StreamBuilder
     (
-      stream: bloc.submitValid,
+      stream: bloc.submitRegister2,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot)
       {
         return AbsorbPointer
@@ -290,10 +398,10 @@ class _LogInPageState extends State<LogInPage>
           (
             onPressed: ()
             {
-              bloc.submit();
+              bloc.registerPage1();
             },
             splashColor: Colors.white,
-            padding: EdgeInsets.only(right: screenSize.width* 0.255, left: screenSize.width* 0.26, top: 18.0, bottom: 18.0,),
+            padding: EdgeInsets.only(right: screenSize.width* 0.235, left: screenSize.width* 0.24, top: 18.0, bottom: 18.0,),
             color: snapshot.data== null? Color.fromRGBO(209, 209, 209, 1.0): Color.fromRGBO(43, 174, 102, 1.0),
             shape: RoundedRectangleBorder
             (
@@ -301,7 +409,7 @@ class _LogInPageState extends State<LogInPage>
             ),
             child: Text
             (
-              'Log In',
+              'Register',
               style: TextStyle
               (
                 fontSize: 16.0,
@@ -311,96 +419,5 @@ class _LogInPageState extends State<LogInPage>
           ),
         );
       });
-  }
-
-  Widget divider()
-  {
-    return Row
-    (
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>
-      [
-        Container
-        (
-          color: Colors.black,
-          height: 1.0,
-          width: screenSize.width* 0.4,
-        ),
-        Container
-        (
-          padding: EdgeInsets.only(right: 5.0, left: 5.0, top: 30.0, bottom: 30.0),
-          child: Text
-          (
-            'OR',
-            style: TextStyle
-            (
-              fontSize: 16.0,
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        Container
-        (
-          color: Colors.black,
-          height: 1.0,
-          width: screenSize.width* 0.4,
-        ),
-      ],
-    );
-  }
-
-  Widget google(BuildContext context)
-  {
-    return Expanded
-    (
-      child: RaisedButton
-      (
-        onPressed: ()
-        {
-
-        },
-        splashColor: Color.fromRGBO(43, 174, 102, 1.0),
-        padding: EdgeInsets.only(top: screenSize.width* 0.1, bottom: screenSize.width* 0.1),
-        color: Color.fromRGBO(209, 209, 209, 1.0),
-        shape: RoundedRectangleBorder
-        (
-          borderRadius: BorderRadius.circular(15.0)
-        ),
-        child: Image.asset
-        (
-          'assets/images/google.png',
-          height: 30.0,
-          width: 30.0,
-        ),
-      ),
-    );
-  }
-
-  Widget facebook(BuildContext context)
-  {
-    return Expanded(
-      child: RaisedButton
-      (
-        onPressed: ()
-        {
-
-        },
-        splashColor: Color.fromRGBO(43, 174, 102, 1.0),
-        padding: EdgeInsets.only(top: screenSize.width* 0.1, bottom: screenSize.width* 0.1),
-        color: Color.fromRGBO(209, 209, 209, 1.0),
-        shape: RoundedRectangleBorder
-        (
-          //side: BorderSide(color: Colors.black, width: 3.0),
-          borderRadius: BorderRadius.circular(15.0)
-        ),
-        child: Image.asset
-        (
-          'assets/images/facebook.png',
-          height: 30.0,
-          width: 30.0,
-        ),
-      ),
-    );
   }
 }

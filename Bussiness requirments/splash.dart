@@ -92,25 +92,25 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       (
         body: Hero
         (
-        tag: 'splashToChoice',
-        child: Container
-          (
-            color: Color.fromRGBO(43, 174, 102, 1.0),
-            child: Center
+          tag: 'splashToChoice',
+          child: Container
             (
-              child: Column
+              color: Color.fromRGBO(43, 174, 102, 1.0),
+              child: Center
               (
-                children: <Widget>
-                [
-                  logo(),
-                  title(),
-                ],
+                child: Column
+                (
+                  children: <Widget>
+                  [
+                    logo(),
+                    title(),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   Widget logo()
